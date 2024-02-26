@@ -9,14 +9,17 @@ const App = () => {
   const { cart, totalPrice } = useSelector(state => state.bookCart);
   const [selectedType, setSelectedType] = useState('')
   const dispatch = useDispatch()
+  // Fetch data from API
   const fetchApiBook = async() => {
     const res = await axios.get('https://retoolapi.dev/WDlW2j/data');
     setBookData(res.data);
   }
+
   useEffect(() => {
     fetchApiBook()
     dispatch(getTotal())
   }, [cart])
+
   return (
     <div className='container mt-5'>
       <div>
@@ -45,23 +48,23 @@ const App = () => {
                 <td>{value.Title}</td>
                 <td>{value.Author}</td>
                 <td>{value.Prix}</td>
-                <td><button className='btn btn-success' onClick={() => dispatch(addToCart(value))}>Ajouter</button></td>
+                <td><button className='btn btn-success' onClick={() => dispatch(addToCart(value))}>Add</button></td>
               </tr>
             ))
           }
         </table>
       </div>
       <div>
-        <h3>Panier</h3>
+        <h3>Cart</h3>
           {
             cart?.length === 0 ? (
-              <p>Votre Panier est vidé !</p>
+              <p>Your Cart is empty !</p>
             ) : (
               <ul>
                 {
                   cart?.map(value => (
                       <li className='mb-1'>{value.Title} - <span>{value.Prix}</span> -   <button className='btn btn-danger' onClick={() => dispatch(removeFromCart(value.ISBN))}>
-                        Supprimer
+                        Delete
                         </button></li>
                   ))
                 }
