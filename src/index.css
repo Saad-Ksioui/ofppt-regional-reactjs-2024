@@ -1,0 +1,13 @@
+
+.links{
+
+  display: flex;
+  gap: 50px;
+  font-size: 1.2rem;
+}
+.links a {
+  color: white;
+}
+.links a:hover{
+  text-decoration: underline;
+}
